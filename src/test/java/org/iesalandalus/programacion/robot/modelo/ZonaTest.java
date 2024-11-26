@@ -79,5 +79,4 @@ class ZonaTest {
         NullPointerException npe = assertThrows(NullPointerException.class, () -> zona.pertenece(null));
         assertEquals("La coordenada no puede ser nula.", npe.getMessage());
     }
-
 }
