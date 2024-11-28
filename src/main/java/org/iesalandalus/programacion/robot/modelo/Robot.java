@@ -10,6 +10,9 @@ public class Robot {
     private Coordenada coordenada;
 
     public Robot() {
+        zona = new Zona();
+        orientacion = Orientacion.NORTE;
+        coordenada = zona.getCentro();
     }
 
     public Coordenada getPosicion() {
@@ -18,51 +21,64 @@ public class Robot {
 
 
     public Robot(Zona zona) {
-        this.zona = zona;
+        setZona(zona);
+        orientacion = Orientacion.NORTE;
+        coordenada = zona.getCentro();
     }
 
     public Robot(Zona zona, Orientacion orientacion) {
-        this.zona = zona;
-        this.orientacion = orientacion;
+        setZona(zona);
+        setOrientacion(orientacion);
+        coordenada = zona.getCentro();
     }
 
     public Robot(Zona zona, Orientacion orientacion, Coordenada coordenada) {
-        this.zona = zona;
-        this.orientacion = orientacion;
-        this.coordenada = coordenada;
+        if (zona == null) {
+            throw new NullPointerException("La zona no puede ser nula.");
+        }
+        if (orientacion == null) {
+            throw new NullPointerException("La orientación no puede ser nula.");
+        }
+        if (coordenada == null) {
+            throw new NullPointerException("La coordenada no puede ser nula.");
+        }
+
+        setZona(zona);
+        setOrientacion(orientacion);
+        setCoordenada(coordenada);
     }
 
     public Robot(Robot robot) {
-        this.zona = robot.zona;
-        this.orientacion = robot.orientacion;
-        this.coordenada = robot.coordenada;
+        zona = robot.zona;
+        orientacion = robot.orientacion;
+        coordenada = robot.coordenada;
     }
 
     public Zona getZona() {
-        return this.zona;
-    }
-
-    private Zona setZona(Zona zona) {
         return zona;
     }
 
-    public Orientacion getOrientacion() {
-        return this.orientacion;
+    private Zona setZona(Zona zona) {
+        return this.zona;
     }
 
-    private Orientacion setOrientacion(Orientacion orientacion) {
+    public Orientacion getOrientacion() {
         return orientacion;
     }
 
-    public Coordenada getCoordenada() {
-        return this.coordenada;
+    private Orientacion setOrientacion(Orientacion orientacion) {
+        return this.orientacion;
     }
 
-    private Coordenada setCoordenada(Coordenada coordenada) {
+    public Coordenada getCoordenada() {
         return coordenada;
     }
 
-    public void avanzar() throws OperationNotSupportedException {
+    private Coordenada setCoordenada(Coordenada coordenada) {
+        return this.coordenada;
+    }
+
+    public void avanzar() {
         int nuevaX = coordenada.x();
         int nuevaY = coordenada.y();
         switch (orientacion) {
@@ -75,11 +91,9 @@ public class Robot {
             case OESTE -> nuevaX--;
             case NOROESTE -> {nuevaX--; nuevaY++;}
         }
-        try {
-            setCoordenada(new Coordenada(nuevaX, nuevaY));
-        } catch (IllegalArgumentException e) {
-            throw new OperationNotSupportedException("No se puede avanzar, ya que se sale de la zona.");
-        }
+
+        Coordenada nuevaCoordenada = new Coordenada(nuevaX, nuevaY);
+        coordenada = nuevaCoordenada;
     }
 
     public void girarALaIzquierda() {

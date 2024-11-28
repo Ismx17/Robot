@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.robot.modelo.vista;
+package org.iesalandalus.programacion.robot.vista;
 
 import org.iesalandalus.programacion.robot.modelo.ControladorRobot;
 import org.iesalandalus.programacion.robot.modelo.Coordenada;
@@ -7,7 +7,7 @@ import org.iesalandalus.programacion.robot.modelo.Zona;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
 public class Consola {
-    private Consola() { }
+    private Consola() {}
 
     public static void mostrarMenuPrincipal() {
         System.out.println("Programa para controlar un robot mediante comandos.");
@@ -20,10 +20,10 @@ public class Consola {
         System.out.println("5.- Ejecutar comando.");
         System.out.println();
         System.out.println("0.- Salir.");
-        System.out.println();
+        System.out.println("---------------------------------------------------");
     }
 
-    public static int elegitOpcion() {
+    public static int elegirOpcion() {
         int opcion;
         do {
             mostrarMenuPrincipal();
@@ -93,14 +93,14 @@ public class Consola {
     }
 
     public static char elegirComando() {
-        System.out.print("Indica el comando a ejecutar: ");
+        System.out.print("Indica comando a ejecutar: ");
         return Entrada.caracter();
     }
 
     public static void mostrarRobot(ControladorRobot controladorRobot) {
         System.out.println();
         if (controladorRobot == null) {
-            System.out.println("Aún no se ha creado ningún robot que controlar.");
+            System.out.println("Aún no se ha creado ningún robot.");
         } else {
             System.out.println(controladorRobot.getRobot());
         }
@@ -109,6 +109,6 @@ public class Consola {
 
     public static void despedirse() {
         System.out.println();
-        System.out.println("Hasta luego Lucas!!!!");
+        System.out.println("Veeeeeenga");
     }
 }

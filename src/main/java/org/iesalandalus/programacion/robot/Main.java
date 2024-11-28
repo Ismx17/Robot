@@ -1,10 +1,9 @@
-package org.iesalandalus.programacion.robot.modelo.main;
+package org.iesalandalus.programacion.robot;
 
 import org.iesalandalus.programacion.robot.modelo.ControladorRobot;
 import org.iesalandalus.programacion.robot.modelo.Robot;
-import org.iesalandalus.programacion.robot.modelo.vista.Consola;
-
-import javax.naming.OperationNotSupportedException;
+import org.iesalandalus.programacion.robot.modelo.RobotExcepcion;
+import org.iesalandalus.programacion.robot.vista.Consola;
 
 public class Main {
     private static ControladorRobot controladorRobot;
@@ -12,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         int opcion;
         do {
-            opcion = Consola.elegitOpcion();
+            opcion = Consola.elegirOpcion();
             ejecutarOpcion(opcion);
             if (opcion != 0) {
                 Consola.mostrarRobot(controladorRobot);
@@ -52,7 +51,7 @@ public class Main {
         if (controladorRobot != null) {
             try {
                 controladorRobot.ejecutar(Consola.elegirComando());
-            } catch (OperationNotSupportedException e) {
+            } catch (RobotExcepcion e) {
                 System.out.println("ERROR: " + e.getMessage());
             }
         }
